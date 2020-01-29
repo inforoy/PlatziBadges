@@ -8,6 +8,7 @@ import './global.css'
 ///import Badge from './components/Badge'
 import BadgeNew from './pages/BadgeNew'
 //import Navbar from './components/Navbar'
+import Badges from './pages/Badges'
 
 const container = document.getElementById('root')
 
@@ -20,4 +21,4 @@ ReactDOM.render(<Badge
     avatarUrl="https://www.gravatar.com/avatar/21594ed15d68ace3965642162f8d2e84?d=identicon"/>, container);
     */
 
-   ReactDOM.render(<BadgeNew />, container);
+   ReactDOM.render(<Badges />, container);
