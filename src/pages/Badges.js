@@ -14,7 +14,7 @@ class Badges extends React.Component {
                 firstName: 'Freda',
                 lastName: 'Grady',
                 email: 'Leann_Berge@gmail.com',
-                jobTitle: 'Legacy Brand Director',
+                jobTitle: 'Director',
                 twitter: 'FredaGrady22221-7573',
                 avatarUrl:
                   'https://www.gravatar.com/avatar/f63a9c45aca0e7e7de0782a6b1dff40b?d=identicon',
@@ -24,7 +24,7 @@ class Badges extends React.Component {
                 firstName: 'Major',
                 lastName: 'Rodriguez',
                 email: 'Ilene66@hotmail.com',
-                jobTitle: 'Human Research Architect',
+                jobTitle: 'Architect',
                 twitter: 'MajorRodriguez61545',
                 avatarUrl:
                   'https://www.gravatar.com/avatar/d57a8be8cb9219609905da25d5f3e50a?d=identicon',
@@ -34,7 +34,7 @@ class Badges extends React.Component {
                 firstName: 'Daphney',
                 lastName: 'Torphy',
                 email: 'Ron61@hotmail.com',
-                jobTitle: 'National Markets Officer',
+                jobTitle: 'Developer',
                 twitter: 'DaphneyTorphy96105',
                 avatarUrl:
                   'https://www.gravatar.com/avatar/e74e87d40e55b9ff9791c78892e55cb7?d=identicon',
@@ -61,17 +61,7 @@ class Badges extends React.Component {
 
                     <div className="Badges__list">
                         <div className="Badges__container">
-                            <ul className="list-unstyled">
-                                {
-                                    this.state.data.map((badge) => {
-                                        return (
-                                        <li key={badge.id}>
-                                            <p>{badge.firstName} {badge.lastName}</p>
-                                        </li>)
-                                    })
-                                }
-
-                            </ul>
+                            <BadgesList badges={this.state.data}/>
 
                         </div>
 
