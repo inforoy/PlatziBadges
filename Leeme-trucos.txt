@@ -1,0 +1,20 @@
+
+-----> Solicitando datos (GET)
+
+venia siguiendo los videos anteriores y en los cuales no muestra la server fake, pero bueno si llegan a esta instancia se debe realizar lo siguiente:
+
+    copiar la carpeta /server y su contenido en la ruta inicial del proyecto
+    copiar el archivo api.js en /src
+    aplica el siguiente comando -->
+    npm install faker json-server npm-run-all --save-dev
+    en el arcivo package.json modificar la parte de script de la siguiente manera:
+    “scripts”: {
+    “start”: “npm-run-all -p client server”,
+    “client”: “react-scripts start”,
+    “server”: “json-server --port 3001 --watch server/db.json”,
+    “seed”: “node server/seed.js”,
+    “build”: “react-scripts build”,
+    “test”: “react-scripts test”,
+    “eject”: “react-scripts eject”
+    }
+    correr el proyecto npm run start
