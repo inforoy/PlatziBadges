@@ -8,7 +8,6 @@ import PageError from "../components/PageError";
 import { Link } from "react-router-dom";
 import api from "../api";
 
-
 class Badges extends React.Component {
     state = {
         loading: true,
