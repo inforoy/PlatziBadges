@@ -3,20 +3,30 @@ import React from 'react';
 import confLogo from '../images/badge-header.svg';
 import './style/Badges.css';
 import BadgesList from '../components/BadgesList';
+import PageLoading from "../components/PageLoading";
+import PageError from "../components/PageError";
 import { Link } from "react-router-dom";
 import api from "../api";
 
-class Badges extends React.Component {
 
+class Badges extends React.Component {
+    state = {
+        loading: true,
+        error: null,
+        data: undefined,
+    };
+
+    /*
     constructor(props) {
-        super(props);
         console.log("1. Constructor");
+        super(props);
         this.state = {
             loading: true,
             error: null,
             data: undefined
         }
     }
+    */
 
     componentDidMount() {
         console.log("3. componentDidMount");
@@ -64,7 +74,6 @@ class Badges extends React.Component {
     fetchData = async () =>{
         this.setState({loading: true, error:null});
         try {
-            //const data = [];
             const data = await api.badges.list();
             this.setState({loading: false, data: data})
         } catch (error) {
@@ -74,29 +83,23 @@ class Badges extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         console.log("5. componentDidUpdate");
-        console.log({
-            prevProps: prevProps, prevState:prevState
-        });
-
-        console.log({
-            props:this.props,
-            state:this.state,
-        })
+        console.log({prevProps: prevProps, prevState:prevState});
+        console.log({props:this.props,state:this.state})
     }
 
     componentWillUnmount() {
         console.log("6. componentWillUnmount");
-        clearTimeout(this.timeoutId);
+        //clearTimeout(this.timeoutId);
     }
 
     render(){
         console.log("2/4. render");
         if(this.state.loading === true){
-            return 'Loading...';
+            return <PageLoading />;
         }
 
-        if(this.state.error === true){
-            return `Error: ${this.state.error.message}`;
+        if(this.state.error){
+            return <PageError error={this.state.error}/>
         }
 
         return (
