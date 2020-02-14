@@ -2,17 +2,16 @@ import React from 'react';
 
 import '../pages/style/BadgeEdit.css'
 import header from '../images/platziconf-logo.svg'
-import Badge from '../components/Badge';
-import BadgeForm from '../components/BadgeForm';
+import Badge from "../components/Badge";
+import BadgeForm from "../components/BadgeForm";
 import api from "../api";
 import md5 from 'md5';
-
 import PageLoading from "../components/PageLoading";
 
 class BadgeEdit extends React.Component {
 
     state = {
-        loading: false,
+        loading: true,
         error: null,
         form: {
             firstName:'',
@@ -21,6 +20,23 @@ class BadgeEdit extends React.Component {
             jobTitle:'',
             twitter:'',
             //avatarUrl:''
+        }
+    };
+
+    componentDidMount() {
+        console.log("1------->"+this.props);
+        this.fetchData();
+    }
+
+    fetchData = async e => {
+        this.setState({loading: true, error:null});
+        try {
+            console.log("2------->"+this.props);
+            const data = await api.badges.read(this.props.match.params.badgeId);
+            this.setState({loading: false, form: data})
+        } catch (error) {
+            console.log("3------->"+error);
+            this.setState({loading: false, error: error})
         }
     };
 
@@ -42,7 +58,7 @@ class BadgeEdit extends React.Component {
         const hash = md5(this.state.form.email);
         this.state.form.avatarUrl = avatarUrl.replace('*.*', hash);
         try {
-            await api.badges.create(this.state.form);
+            await api.badges.update(this.props.match.params.badgeId, this.state.form);
             this.setState({loading: false});
             this.props.history.push('/badges');
         } catch (error) {
@@ -52,6 +68,8 @@ class BadgeEdit extends React.Component {
     };
 
     render(){
+        console.log("0------->");
+
         if(this.state.loading){
             return <PageLoading />
         }
@@ -75,6 +93,7 @@ class BadgeEdit extends React.Component {
                     </div>
 
                     <div className="col-6">
+                        <h1>Edit Attendant</h1>
                         <BadgeForm
                             onChange={this.handleChange}
                             onSubmit={this.handleSubmit}

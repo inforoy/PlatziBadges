@@ -24,6 +24,10 @@ class BadgeNew extends React.Component {
         }
     };
 
+    componentDidMount() {
+        console.log("Load BadgeNew")
+    }
+
     handleChange = e => {
         this.setState({
             form: {
@@ -75,6 +79,7 @@ class BadgeNew extends React.Component {
                     </div>
 
                     <div className="col-6">
+                        <h1>New Attendant</h1>
                         <BadgeForm
                             onChange={this.handleChange}
                             onSubmit={this.handleSubmit}
