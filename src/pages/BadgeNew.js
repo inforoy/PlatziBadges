@@ -12,8 +12,8 @@ import PageLoading from "../components/PageLoading";
 class BadgeNew extends React.Component {
 
     state = {
-        //loading: false,
-        //error: null,
+        loading: false,
+        error: null,
         form: {
             firstName:'',
             lastName:'',
@@ -36,7 +36,6 @@ class BadgeNew extends React.Component {
     handleSubmit = async e => {
         e.preventDefault();
         console.log("Form was Submit...");
-        console.log(this.state);
         this.setState({loading: true, error: null});
 
         const avatarUrl = 'https://www.gravatar.com/avatar/*.*?d=identicon';
@@ -45,6 +44,7 @@ class BadgeNew extends React.Component {
         try {
             await api.badges.create(this.state.form);
             this.setState({loading: false});
+            this.props.history.push('/badges');
         } catch (error) {
             this.setState({loading: false, error: error});
         }
@@ -52,9 +52,9 @@ class BadgeNew extends React.Component {
     };
 
     render(){
-        /*if(this.state.loading){
+        if(this.state.loading){
             return <PageLoading />
-        }*/
+        }
 
         return (<React.Fragment>
 
@@ -79,7 +79,7 @@ class BadgeNew extends React.Component {
                             onChange={this.handleChange}
                             onSubmit={this.handleSubmit}
                             formValues={this.state.form}
-                            /*error={this.state.error}*/
+                            error={this.state.error}
                         />
                     </div>
 
